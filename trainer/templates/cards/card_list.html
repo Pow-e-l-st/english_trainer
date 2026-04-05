@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Мои карточки{% endblock %}
+{% block content %}
+<h1 class="text-center text-white mb-4">📖 Мои карточки</h1>
+<div class="text-end mb-3">
+    <a href="{% url 'card_create' %}" class="btn btn-success">➕ Добавить карточку</a>
+</div>
+<div class="row">
+    {% for card in cards %}
+        <div class="col-md-4 mb-4">
+            <div class="card card-custom h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ card.word }}</h5>
+                    <p class="card-text text-muted">{{ card.translation }}</p>
+                    {% if card.category %}<span class="badge bg-secondary">{{ card.category }}</span>{% endif %}
+                </div>
+                <div class="card-footer bg-transparent d-flex justify-content-between">
+                    <a href="{% url 'card_edit' card.id %}" class="btn btn-sm btn-outline-primary">✏️ Редактировать</a>
+                    <a href="{% url 'card_delete' card.id %}" class="btn btn-sm btn-outline-danger">🗑️ Удалить</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12 text-center text-white">
+            <p>У вас пока нет карточек. <a href="{% url 'card_create' %}" class="text-white">Создайте первую</a>!</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
