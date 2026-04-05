@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Случайное задание{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card card-custom p-4">
+            <h2 class="text-center mb-4">🎲 Случайное задание</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_count" class="form-label">Количество карточек</label>
+                    {{ form.count }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_category" class="form-label">Категория (необязательно)</label>
+                    <select name="category" id="id_category" class="form-control">
+                        <option value="">Все категории</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat }}" {% if form.category.value == cat %}selected{% endif %}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Создать и начать</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
