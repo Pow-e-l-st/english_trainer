@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Выход{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card card-custom p-4 text-center">
+            <h2>Вы вышли из системы</h2>
+            <p>Спасибо, что использовали English Trainer.</p>
+            <a href="{% url 'login' %}" class="btn btn-primary">Войти снова</a>
+            <a href="{% url 'signup' %}" class="btn btn-secondary mt-2">Зарегистрироваться</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
