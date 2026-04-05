@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Результат{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6"><div class="card card-custom p-4 text-center">
+    <h2>Результат: {{ title }}</h2>
+    <h3>Правильных ответов: {{ score }} из {{ total }}</h3>
+    <a href="{% url 'assignment_list' %}" class="btn btn-primary mt-3">К списку заданий</a>
+</div></div></div>
+{% endblock %}
