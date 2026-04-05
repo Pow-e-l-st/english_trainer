@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Добро пожаловать{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card card-custom p-5 text-center">
+            <h1>📘 English Trainer</h1>
+            <p class="lead">Изучайте английские слова с помощью карточек и заданий.</p>
+            <p>Создавайте карточки, объединяйте их в задания и тренируйтесь в режиме перевода.</p>
+            <div class="mt-4">
+                <a href="{% url 'login' %}" class="btn btn-primary">Войти</a>
+                <a href="{% url 'signup' %}" class="btn btn-secondary">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
