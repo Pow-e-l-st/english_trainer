@@ -1,0 +1,36 @@
+# ВО
+venv/
+env/
+ENV/
+
+# База
+db.sqlite3
+*.sqlite3
+
+# Кэш
+__pycache__/
+*.pyc
+*.pyo
+
+# Логи
+*.log
+
+# Настройки IDE
+.idea/
+.vscode/
+*.iml
+
+# СФ Django
+*.pid
+*.lock
+
+# Сист Ф
+.DS_Store
+Thumbs.db
+
+# Деятеьность
+staticfiles/
+media/
+
+# Секретики
+.env
