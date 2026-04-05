@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card card-custom p-4">
+            <h2 class="text-center mb-4">{{ title }}</h2>
+            <form method="post" id="assignmentForm">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_name" class="form-label">Название</label>
+                    <input type="text" name="name" id="id_name" class="form-control" value="{{ name_value|default:form.name.value|default:'' }}">
+                </div>
+                <div class="mb-3">
+                    <label for="id_description" class="form-label">Описание</label>
+                    <textarea name="description" id="id_description" class="form-control" rows="3">{{ description_value|default:form.description.value|default:'' }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Карточки</label>
+                    <div class="mb-2">
+                        <!-- Ссылка "Все категории" эксперимент борьба с исчезновением -->
+                        <a href="?{% if name_value %}name={{ name_value|urlencode }}&{% endif %}{% if description_value %}description={{ description_value|urlencode }}&{% endif %}{% for card_id in selected_cards_ids %}cards={{ card_id }}&{% endfor %}" class="btn btn-sm btn-secondary">Все категории</a>
+                        {% for cat in categories %}
+                            <a href="?cat={{ cat|urlencode }}&{% if name_value %}name={{ name_value|urlencode }}&{% endif %}{% if description_value %}description={{ description_value|urlencode }}&{% endif %}{% for card_id in selected_cards_ids %}cards={{ card_id }}&{% endfor %}" class="btn btn-sm {% if category_filter == cat %}btn-secondary{% else %}btn-outline-secondary{% endif %}">{{ cat }}</a>
+                        {% endfor %}
+                    </div>
+                    <select name="cards" id="id_cards" multiple class="form-control" size="10">
+                        {% for card in cards %}
+                            <option value="{{ card.id }}" {% if card.id|stringformat:"s" in selected_cards_ids %}selected{% endif %}>
+                                {{ card.word }} → {{ card.translation }} {% if card.category %}({{ card.category }}){% endif %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <small class="form-text text-muted">Удерживайте Ctrl (Cmd на Mac) для выбора нескольких карточек.</small>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="{% url 'assignment_list' %}" class="btn btn-secondary">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

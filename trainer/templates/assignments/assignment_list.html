@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Мои задания{% endblock %}
+{% block content %}
+<h1 class="text-center text-white mb-4">📋 Мои задания</h1>
+<a href="{% url 'assignment_create' %}" class="btn btn-success mb-3">➕ Создать задание</a>
+<div class="row">
+    {% for assignment in assignments %}
+        <div class="col-md-4 mb-4"><div class="card card-custom h-100"><div class="card-body"><h5 class="card-title">{{ assignment.name }}</h5><p class="card-text">{{ assignment.description|truncatewords:20 }}</p><p class="text-muted">Карточек: {{ assignment.cards.count }}</p></div><div class="card-footer bg-transparent d-flex justify-content-between">
+            <div class="btn-group" role="group">
+                <a href="{% url 'practice_assignment' assignment.id 'en-ru' %}" class="btn btn-sm btn-primary">EN→RU</a>
+                <a href="{% url 'practice_assignment' assignment.id 'ru-en' %}" class="btn btn-sm btn-primary">RU→EN</a>
+            </div>
+            <div><a href="{% url 'assignment_edit' assignment.id %}" class="btn btn-sm btn-outline-primary">✏️</a> <a href="{% url 'assignment_delete' assignment.id %}" class="btn btn-sm btn-outline-danger">🗑️</a></div>
+        </div></div></div>
+    {% empty %}<div class="col-12 text-center text-white"><p>Нет заданий. <a href="{% url 'assignment_create' %}" class="text-white">Создайте первое</a>!</p></div>{% endfor %}
+</div>
+{% endblock %}
